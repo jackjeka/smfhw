@@ -39,7 +39,7 @@ class Horoscope
 
     public function getText()
     {
-        return $this->sign;
+        return $this->text;
     }
 
     public function setText($text)

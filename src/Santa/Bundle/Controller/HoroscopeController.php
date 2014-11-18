@@ -5,27 +5,24 @@ namespace Santa\Bundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Santa\Bundle\Entity;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class HoroscopeController extends Controller
 {
-    public function newAction(Request $request){
-            // create a task and give it some dummy data for this example
-            $horoscope  = new Entity\Horoscope();
-            $horoscope->setDay('tomorrow');
-            $horoscope->setSign('sagittarius');
-            $horoscope->setText('stars and planets bla-bla');
+    public function newAction(Request $request)
+    {
+        $horoscope = new Entity\Horoscope();
 
-            $form = $this->createFormBuilder($horoscope)
-                ->add('day', 'text')
-                ->add('sign', 'text')
-                ->add('save', 'submit', array('label' => 'Get your fortune cookie'))
-                ->getForm();
+        $form = $this->createFormBuilder($horoscope)
+            ->setMethod('GET')
+            ->add('day', 'choice', array('choices' => array('today', 'tomorrow')))
+            ->add('sign', 'choice', array('choices' => array('gemini', 'scorpio', 'sagittarius', 'etc')))
+            ->add('check', 'button', array('label' => 'Get your fortune cookie'))
+            ->getForm();
 
-            return $this->render('SantaBundle:Default:horoscope.html.twig', array(
-                'form' => $form->createView(),
-            ));
-        }
+        $form->handleRequest($request);
 
-//        return $this->render('SantaBundle:Default:horoscope.html.twig', array('day' => $day, 'sign' => $sign));
-
+        return $this->render('SantaBundle:Default:horoscope.html.twig', array('form' => $form->createView()));
+    }
 }
