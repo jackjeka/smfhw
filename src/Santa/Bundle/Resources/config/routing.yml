@@ -1,3 +1,5 @@
 horoscope_page:
-    path:     /horoscope/{sign}
-    defaults: { _controller: SantaBundle:Default:index, sign: 'Sagittarius' }
+    path:     /horoscope/
+    defaults: { _controller: SantaBundle:Horoscope:new}
+
+
