@@ -1,0 +1,11 @@
+_horoscope:
+    path: /horoscope
+    defaults: { _controller: SantaBundle:Horoscope:new}
+
+#_task_success:
+#    pattern: /
+#    defaults: { _controller: SantaBundle:Horoscope:new}
+#
+
+#    methods: get
+
